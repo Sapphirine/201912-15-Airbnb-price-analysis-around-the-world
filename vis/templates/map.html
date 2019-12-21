@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<div class="ui container">
+    <div class="ui large secondary inverted pointing menu">
+        <a href="{% url 'home' %}" class="item">Home</a>
+        <a href="{% url 'map' %}" class="active item">City reports</a>
+        <a href="{% url 'predictor' %}" class="item">Price predictor</a>
+    </div>
+</div>
+<div id="mapid" class="worldmap"></div>
+<script type="text/javascript" src='{% static "js/map.js" %}'></script>
+{% endblock %}

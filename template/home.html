@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="ui container">
+        <div class="ui large secondary inverted pointing menu">
+            <a href="{% url 'home' %}" class="active item">Home</a>
+            <a href="{% url 'map' %}" class="item">City reports</a>
+            <a href="{% url 'predictor' %}" class="item">Price predictor</a>
+        </div>
+    </div>
+    <div class="ui inverted vertical masthead center aligned segment">
+        <div class="ui text container">
+            <h1 class="ui inverted header">Welcome to Price Airbnb!</h1>
+            <h2>Click to select one function.</h2>
+            <br>
+            <a href="{% url 'map' %}" class="ui massive inverted teal button">City reports</a>
+            <a href="{% url 'predictor' %}" class="ui massive inverted orange button">Price predictor</a>
+        </div>
+    </div>
+{% endblock %}

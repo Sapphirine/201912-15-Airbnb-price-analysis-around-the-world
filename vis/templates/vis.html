@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<div class="ui container">
+    <div class="ui large secondary inverted pointing menu">
+        <a href="{% url 'home' %}" class="item">Home</a>
+        <a href="{% url 'map' %}" class="active item">City reports</a>
+        <a href="{% url 'predictor' %}" class="item">Price predictor</a>
+    </div>
+</div>
+<div id="mapid" class="map"></div>
+<div>
+    <div id="seasonal-chart"></div>
+    <div id="distribution-chart"></div>
+    <div id="price-range-chart"></div>
+    <div id="region-price-chart"></div>
+</div>
+<script>
+    var dateList = `{{ date_list }}`;
+    var medianList = `{{ median_list }}`;
+    var avgList = `{{ avg_list }}`;
+    var hotel = `{{ hotel }}`;
+    var private = `{{ private }}`;
+    var entire = `{{ entire }}`;
+    var share = `{{ shared }}`;
+    var priceCategory = "{{ price_category }}";
+    var entireList = "{{ entire_list }}";
+    var privateList = "{{ private_list }}";
+    var hotelList = "{{ hotel_list }}";
+    var shareList = "{{ share_list }}";
+    var regionCategory = "{{ region_category }}";
+    var maxCount = "{{ max_count }}";
+    var entireRegionList = "{{ entire_region_list }}";
+    var privateRegionList= "{{ private_region_list }}";
+    var hotelRegionList = "{{ hotel_region_list }}";
+    var shareRegionList = "{{ share_region_list }}";
+    var regionPrice = "{{ region_price }}";
+    var city = "{{ city }}";
+</script>
+<script type="text/javascript" src='{% static "js/vis.js" %}'></script>
+<script type="text/javascript" src='{% static "js/chart.js" %}'></script>
+{% endblock %}

@@ -1,0 +1,160 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static "css/style.css" %}">
+<div class="ui container">
+    <div class="ui large secondary inverted pointing menu">
+        <a href="{% url 'home' %}" class="item">Home</a>
+        <a href="{% url 'map' %}" class="item">City reports</a>
+        <a href="{% url 'predictor' %}" class="active item">Price predictor</a>
+    </div>
+</div>
+<div class="ui text container">
+    <div class="ui two column grid">
+        <div class="eight wide column">
+            <form method="post" action="{% url 'predictor' %}" class="ui inverted form" id="predict-form">
+                {% csrf_token %}
+                <div class="field">
+                    <label>Location</label>
+                    <div class="two fields">
+                        <div class="field">
+                            <select class="ui dropdown" name="city" id="city" required>
+                                <option value="">City</option>
+                                <option value="nyc">NYC</option>
+                                <option value="london">London</option>
+                                <option value="beijing">Beijing</option>
+                                <option value="paris">Paris</option>
+                                <option value="tokyo">Tokyo</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <select class="ui disabled dropdown" name="neighbourhood" id="neighbourhood" required>
+                                <option value="">Neighbourhood</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="three fields">
+                    <div class="field">
+                        <label>Property type</label>
+                        <select class="ui disabled dropdown" name="property-type" id="property-type" required>
+                            <option value="">Property</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label>Room type</label>
+                        <select class="ui disabled dropdown" name="room-type" id="room-type" required>
+                            <option value="">Room</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label>Bed type</label>
+                        <select class="ui dropdown" name="bed-type" required>
+                            <option value="Airbed">Airbed</option>
+                            <option value="Couch">Couch</option>
+                            <option value="Futon">Futon</option>
+                            <option value="Pull-out Sofa">Pull-out Sofa</option>
+                            <option value="Real Bed">Real Bed</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="three fields">
+                    <div class="field">
+                        <label>Minimum Nights</label>
+                        <div class="ui left icon input">
+                            <input type="number" name="minimum-nights" min="1" placeholder="1" required/>
+                            <i class="moon icon"></i>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>Bedrooms</label>
+                        <div class="ui left icon input">
+                            <input type="number" name="bedroom-num" min="1" max="50" placeholder="1" required/>
+                            <i class="home icon"></i>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>Beds</label>
+                        <div class="ui left icon input">
+                            <input type="number" name="bed-num" min="1" max="47" placeholder="1" required/>
+                            <i class="bed icon"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="three fields">
+                    <div class="field">
+                        <label>Bathrooms</label>
+                        <div class="ui left icon input">
+                            <input type="number" name="bathroom-num" min="1" max="25" placeholder="1" required/>
+                            <i class="bath icon"></i>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>Accomendates</label>
+                        <div class="ui left icon input">
+                            <input type="number" name="accomendate-num" min="1" max="50" placeholder="1" required/>
+                            <i class="user icon"></i>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>Rating</label>
+                        <div class="ui left icon input">
+                            <input type="number" name="rating" min="1" max="100" placeholder="100" required/>
+                            <i class="star icon"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="field">
+                    <label>Amenities</label>
+                    <div class="ui checkbox">
+                        <input type="checkbox" name="wifi">
+                        <label>Wifi</label>
+                    </div>
+                    <div class="ui checkbox">
+                        <input type="checkbox" name="smart-lock">
+                        <label>Smart lock</label>
+                    </div>
+                    <div class="ui checkbox">
+                        <input type="checkbox" name="air-conditioning">
+                        <label>Air conditioning</label>
+                    </div>
+                    <div class="ui checkbox">
+                        <input type="checkbox" name="kitchen">
+                        <label>Kitchen</label>
+                    </div>
+                    <div class="ui checkbox">
+                        <input type="checkbox" name="washer-dryer">
+                        <label>Washer / Dryer</label>
+                    </div>
+                    <div class="ui checkbox">
+                        <input type="checkbox" name="pets">
+                        <label>Pets</label>
+                    </div>
+                    <div class="ui checkbox">
+                        <input type="checkbox" name="elevator">
+                        <label>Elevator</label>
+                    </div>
+                    <div class="ui checkbox">
+                        <input type="checkbox" name="parking">
+                        <label>Free parking</label>
+                    </div>
+                </div>
+                <div class="ui center aligned container" id="predit-button">
+                    <button type="submit" class="ui huge teal button">
+                        <i class="calculator icon"></i>Predict
+                    </button>
+                </div>
+            </form>
+        </div>
+        <div class="eight wide column">
+            <div id="seasonal-results"></div>
+        </div>
+    </div>
+</div>
+<script>
+    var min = `{{ min }}`;
+    var max = `{{ max }}`;
+    var res = `{{ res }}`;
+</script>
+<script type="text/javascript" src='{% static "js/predict.js" %}'></script>
+{% endblock %}
